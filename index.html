@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Luxe Closet</title>
+
+<style>
+body{
+font-family: 'Arial';
+background:#0f0f0f;
+color:white;
+margin:0;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+padding:15px;
+background:black;
+}
+
+.logo{
+color:#9CAF88;
+font-size:20px;
+font-weight:bold;
+}
+
+.container{
+padding:10px;
+}
+
+.card{
+background:#1a1a1a;
+border-radius:20px;
+padding:15px;
+margin-bottom:20px;
+box-shadow:0 0 10px rgba(0,0,0,0.5);
+}
+
+.slider{
+position:relative;
+}
+
+.slider img{
+width:100%;
+border-radius:15px;
+}
+
+.arrow{
+position:absolute;
+top:40%;
+background:rgba(0,0,0,0.6);
+border:none;
+color:white;
+font-size:20px;
+padding:5px 10px;
+cursor:pointer;
+}
+
+.left{left:10px;}
+.right{right:10px;}
+
+.price{
+color:#9CAF88;
+font-size:18px;
+}
+
+.old{
+text-decoration:line-through;
+color:gray;
+font-size:14px;
+}
+
+select, button{
+width:100%;
+padding:10px;
+border-radius:10px;
+margin-top:10px;
+border:none;
+}
+
+button{
+background:#9CAF88;
+color:black;
+font-weight:bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<div class="logo">LUXE.CLOSET.DZ</div>
+<div>🛒 0</div>
+</header>
+
+<div class="container">
+
+<!-- منتج -->
+<div class="card">
+<div class="slider">
+<img id="img1" src="https://via.placeholder.com/300">
+
+<button class="arrow left" onclick="prev(1)">‹</button>
+<button class="arrow right" onclick="next(1)">›</button>
+</div>
+
+<h3>Polo Shirt</h3>
+<div class="price">2800 DA</div>
+
+<select>
+<option>S</option>
+<option>M</option>
+<option>L</option>
+</select>
+
+<button onclick="goOrder('Polo Shirt')">Add to Cart</button>
+</div>
+
+<!-- منتج 2 -->
+<div class="card">
+<div class="slider">
+<img id="img2" src="https://via.placeholder.com/300">
+
+<button class="arrow left" onclick="prev(2)">‹</button>
+<button class="arrow right" onclick="next(2)">›</button>
+</div>
+
+<h3>NY Hoodie</h3>
+<div>
+<span class="old">4000 DA</span>
+<span class="price">3500 DA</span>
+</div>
+
+<select>
+<option>M</option>
+<option>L</option>
+<option>XL</option>
+</select>
+
+<button onclick="goOrder('NY Hoodie')">Add to Cart</button>
+</div>
+
+</div>
+
+<script>
+let images = {
+1: ["https://via.placeholder.com/300","https://via.placeholder.com/301"],
+2: ["https://via.placeholder.com/300","https://via.placeholder.com/302"]
+};
+
+let index = {1:0,2:0};
+
+function next(id){
+index[id]++;
+if(index[id] >= images[id].length) index[id]=0;
+document.getElementById("img"+id).src = images[id][index[id]];
+}
+
+function prev(id){
+index[id]--;
+if(index[id] < 0) index[id]=images[id].length-1;
+document.getElementById("img"+id).src = images[id][index[id]];
+}
+
+function goOrder(product){
+window.location.href = "order.html?product=" + product;
+}
+</script>
+
+</body>
+</html>

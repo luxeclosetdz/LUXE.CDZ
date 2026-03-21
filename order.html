@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>طلب المنتج</title>
+
+<style>
+body{
+font-family: Arial;
+background:#0f0f0f;
+color:white;
+padding:20px;
+}
+
+input, select{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:10px;
+border:none;
+}
+
+button{
+background:#9CAF88;
+color:black;
+padding:15px;
+border:none;
+width:100%;
+border-radius:10px;
+font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<h2>إتمام الطلب</h2>
+
+<input id="name" placeholder="الاسم و اللقب">
+<input id="phone" placeholder="رقم الهاتف">
+<input id="state" placeholder="الولاية">
+
+<select id="size">
+<option>S</option>
+<option>M</option>
+<option>L</option>
+<option>XL</option>
+</select>
+
+<select id="delivery">
+<option>توصيل للمنزل</option>
+<option>توصيل للمكتب</option>
+</select>
+
+<button onclick="send()">تأكيد الطلب عبر واتساب</button>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const product = params.get("product");
+
+function send(){
+let msg = `طلب جديد:\n
+المنتج: ${product}\n
+الاسم: ${name.value}\n
+الهاتف: ${phone.value}\n
+الولاية: ${state.value}\n
+المقاس: ${size.value}\n
+التوصيل: ${delivery.value}`;
+
+let link = "https://wa.me/213668086810?text=" + encodeURIComponent(msg);
+
+window.open(link);
+}
+</script>
+
+</body>
+</html>
