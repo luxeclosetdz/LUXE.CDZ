@@ -4,43 +4,37 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Luxe Closet</title>
+<title>LUXE.CLOSET</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
 
 <style>
 body{
-font-family: 'Arial';
-background:#0f0f0f;
+font-family:'Cairo', sans-serif;
+background:#0a0a0a;
 color:white;
 margin:0;
 }
 
 header{
-display:flex;
-justify-content:space-between;
-padding:15px;
-background:black;
-}
-
-.logo{
+text-align:center;
+padding:20px;
+font-size:24px;
 color:#9CAF88;
-font-size:20px;
-font-weight:bold;
+text-shadow:0 0 10px #9CAF88;
 }
 
 .container{
-padding:10px;
+padding:15px;
 }
 
 .card{
-background:#1a1a1a;
+background:#111;
 border-radius:20px;
 padding:15px;
-margin-bottom:20px;
-box-shadow:0 0 10px rgba(0,0,0,0.5);
-}
-
-.slider{
-position:relative;
+margin-bottom:25px;
+box-shadow:0 0 20px rgba(156,175,136,0.4);
+border:1px solid rgba(156,175,136,0.3);
 }
 
 .slider img{
@@ -48,43 +42,34 @@ width:100%;
 border-radius:15px;
 }
 
-.arrow{
-position:absolute;
-top:40%;
-background:rgba(0,0,0,0.6);
-border:none;
-color:white;
-font-size:20px;
-padding:5px 10px;
-cursor:pointer;
-}
-
-.left{left:10px;}
-.right{right:10px;}
-
 .price{
 color:#9CAF88;
-font-size:18px;
+font-size:20px;
+text-shadow:0 0 10px #9CAF88;
 }
 
 .old{
 text-decoration:line-through;
 color:gray;
-font-size:14px;
 }
 
-select, button{
+button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:12px;
+background:#9CAF88;
+color:black;
+font-weight:bold;
+margin-top:10px;
+box-shadow:0 0 10px #9CAF88;
+}
+
+select{
 width:100%;
 padding:10px;
 border-radius:10px;
 margin-top:10px;
-border:none;
-}
-
-button{
-background:#9CAF88;
-color:black;
-font-weight:bold;
 }
 </style>
 
@@ -92,82 +77,51 @@ font-weight:bold;
 
 <body>
 
-<header>
-<div class="logo">LUXE.CLOSET.DZ</div>
-<div>🛒 0</div>
-</header>
+<header>LUXE.CLOSET.DZ</header>
 
 <div class="container">
 
-<!-- منتج -->
 <div class="card">
-<div class="slider">
-<img id="img1" src="Picsart_26-03-09_11-16-24-499.jpg">
-
-<button class="arrow left" onclick="prev(1)">‹</button>
-<button class="arrow right" onclick="next(1)">›</button>
-</div>
+<img src="Picsart_26-03-09_11-16-24-499.jpg">
 
 <h3>Polo Shirt</h3>
 <div class="price">2800 DA</div>
 
-<select>
+<select id="size1">
 <option>S</option>
 <option>M</option>
 <option>L</option>
 </select>
 
-<button onclick="goOrder('Polo Shirt')">Add to Cart</button>
+<button onclick="order('Polo Shirt','images/tshirt1.jpg','2800 DA','size1')">اطلب الآن</button>
 </div>
 
-<!-- منتج 2 -->
 <div class="card">
-<div class="slider">
-<img id="img2" src="https://via.placeholder.com/300">
-
-<button class="arrow left" onclick="prev(2)">‹</button>
-<button class="arrow right" onclick="next(2)">›</button>
-</div>
+<img src="Picsart_26-03-09_11-23-37-385.jpg">
 
 <h3>NY Hoodie</h3>
 <div>
-<span class="old">4000 DA</span>
-<span class="price">3500 DA</span>
+<span class="old">2200 DA</span>
+<span class="price">2200 DA</span>
 </div>
 
-<select>
+<select id="size2">
+<option>S</option>
 <option>M</option>
 <option>L</option>
-<option>XL</option>
 </select>
 
-<button onclick="goOrder('NY Hoodie')">Add to Cart</button>
+<button onclick="order('NY Hoodie','images/hoodie1.jpg','3500 DA','size2')">اطلب الآن</button>
 </div>
 
 </div>
 
 <script>
-let images = {
-1: ["https://via.placeholder.com/300","https://via.placeholder.com/301"],
-2: ["https://via.placeholder.com/300","https://via.placeholder.com/302"]
-};
+function order(name,img,price,sizeId){
+let size = document.getElementById(sizeId).value;
 
-let index = {1:0,2:0};
-
-function next(id){
-index[id]++;
-if(index[id] >= images[id].length) index[id]=0;
-document.getElementById("img"+id).src = images[id][index[id]];
-}
-
-function prev(id){
-index[id]--;
-if(index[id] < 0) index[id]=images[id].length-1;
-document.getElementById("img"+id).src = images[id][index[id]];
-}
-
-function goOrder(product){
-window.location.href = "order.html?product=" + product;
+window.location.href =
+`order.html?name=${name}&img=${img}&price=${price}&size=${size}`;
 }
 </script>
 
