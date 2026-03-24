@@ -89,24 +89,29 @@ document.getElementById("productPrice").innerText = price;
 
 function send(){
 
+let userName = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
+let state = document.getElementById("state").value;
+let delivery = document.getElementById("delivery").value;
+
 let msg = `طلب جديد 🔥
 
 🛍 المنتج: ${nameP}
 💰 السعر: ${price}
 📏 المقاس: ${size}
 
-👤 الاسم: ${name.value}
-📞 الهاتف: ${phone.value}
-📍 الولاية: ${state.value}
-🚚 التوصيل: ${delivery.value}
+👤 الاسم: ${userName}
+📞 الهاتف: ${phone}
+📍 الولاية: ${state}
+🚚 التوصيل: ${delivery}
 
 📸 صورة المنتج:
-${window.location.origin}/${img}`;
+${img}`;
 
 let link = "https://wa.me/213668086810?text=" + encodeURIComponent(msg);
 
 window.open(link);
-}
+  }
 </script>
 
 </body>
