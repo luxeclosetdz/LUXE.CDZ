@@ -6,30 +6,51 @@
 
 <title>إتمام الطلب</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
-
 <style>
 body{
-font-family:'Cairo', sans-serif;
+font-family:Arial;
 background:#0a0a0a;
 color:white;
 padding:20px;
+opacity:0;
+animation:fadeIn 0.6s forwards;
+}
+
+@keyframes fadeIn{
+to{opacity:1;}
 }
 
 .card{
 background:#111;
 padding:20px;
 border-radius:20px;
-box-shadow:0 0 20px rgba(156,175,136,0.4);
+box-shadow:0 0 20px #9CAF88;
+transform:translateY(40px);
+opacity:0;
+animation:cardUp 0.6s forwards;
+animation-delay:0.3s;
 }
+
+@keyframes cardUp{
+to{
+transform:translateY(0);
+opacity:1;
+}
+}
+
 #productImg{
 width:100%;
-height:150px;
+height:180px;
 object-fit:contain;
 border-radius:10px;
 margin-bottom:10px;
-background:#000;
-  }
+animation:zoomIn 0.5s;
+}
+
+@keyframes zoomIn{
+from{transform:scale(0.8);}
+to{transform:scale(1);}
+}
 
 input, select{
 width:100%;
@@ -37,6 +58,26 @@ padding:12px;
 margin:10px 0;
 border-radius:10px;
 border:none;
+opacity:0;
+transform:translateX(-20px);
+animation:slideIn 0.5s forwards;
+}
+
+input:nth-child(4){animation-delay:0.4s;}
+input:nth-child(5){animation-delay:0.5s;}
+input:nth-child(6){animation-delay:0.6s;}
+select{animation-delay:0.7s;}
+
+@keyframes slideIn{
+to{
+opacity:1;
+transform:translateX(0);
+}
+}
+
+input:focus, select:focus{
+outline:none;
+box-shadow:0 0 10px #9CAF88;
 }
 
 button{
@@ -47,56 +88,9 @@ border:none;
 width:100%;
 border-radius:12px;
 font-weight:bold;
-box-shadow:0 0 10px #9CAF88;
-}
- body{
-opacity:0;
-animation:fadeIn 0.6s ease forwards;
-}
-
-@keyframes fadeIn{
-to{opacity:1;}
-  }
-  .card{
-transform:translateY(40px);
-opacity:0;
-animation:cardUp 0.6s ease forwards;
-animation-delay:0.3s;
-}
-
-@keyframes cardUp{
-to{
-transform:translateY(0);
-opacity:1;
-}
-  }
-  #productImg{
-animation:zoomIn 0.5s ease;
-}
-
-@keyframes zoomIn{
-from{transform:scale(0.8);}
-to{transform:scale(1);}
-  }
-  input, select{
-opacity:0;
-transform:translateX(-20px);
-animation:slideIn 0.5s ease forwards;
-}
-
-input:nth-child(1){animation-delay:0.4s;}
-input:nth-child(2){animation-delay:0.5s;}
-input:nth-child(3){animation-delay:0.6s;}
-select{animation-delay:0.7s;}
-
-@keyframes slideIn{
-to{
-opacity:1;
-transform:translateX(0);
-}
-  }
-  button{
+margin-top:10px;
 transition:0.3s;
+animation:pulse 2s infinite;
 }
 
 button:hover{
@@ -104,20 +98,16 @@ transform:scale(1.05);
 box-shadow:0 0 25px #9CAF88;
 }
 
-button{
-animation:pulse 2s infinite;
-}
-
 @keyframes pulse{
 0%{box-shadow:0 0 10px #9CAF88;}
 50%{box-shadow:0 0 25px #9CAF88;}
 100%{box-shadow:0 0 10px #9CAF88;}
-  }
-  input:focus, select:focus{
-outline:none;
-box-shadow:0 0 10px #9CAF88;
-  }
-  
+}
+
+.info{
+margin:5px 0;
+color:#9CAF88;
+}
 </style>
 
 </head>
@@ -129,7 +119,8 @@ box-shadow:0 0 10px #9CAF88;
 <img id="productImg">
 
 <h2 id="productName"></h2>
-<p id="productPrice"></p>
+<p id="productPrice" class="info"></p>
+<p id="productSize" class="info"></p>
 
 <input id="name" placeholder="الاسم و اللقب">
 <input id="phone" placeholder="رقم الهاتف">
@@ -140,7 +131,7 @@ box-shadow:0 0 10px #9CAF88;
 <option>توصيل للمكتب</option>
 </select>
 
-<button onclick="send()">تأكيد الطلب عبر واتساب</button>
+<button onclick="send()">🛒 تأكيد الطلب عبر واتساب</button>
 
 </div>
 
@@ -152,16 +143,12 @@ const img = params.get("img");
 const price = params.get("price");
 const size = params.get("size");
 
- document.getElementById("productImg").src = img;
-document.getElementById("productName").innerText = name;
-document.getElementById("productPrice").innerText = price;
+document.getElementById("productImg").src = img;
+document.getElementById("productName").innerText = nameP;
+document.getElementById("productPrice").innerText = "💰 " + price;
+document.getElementById("productSize").innerText = "📏 المقاس: " + size;
 
 function send(){
-
-let userName = document.getElementById("name").value;
-let phone = document.getElementById("phone").value;
-let state = document.getElementById("state").value;
-let delivery = document.getElementById("delivery").value;
 
 let msg = `طلب جديد 🔥
 
@@ -169,18 +156,15 @@ let msg = `طلب جديد 🔥
 💰 السعر: ${price}
 📏 المقاس: ${size}
 
-👤 الاسم: ${userName}
-📞 الهاتف: ${phone}
-📍 الولاية: ${state}
-🚚 التوصيل: ${delivery}
-
-📸 صورة المنتج:
-${img}`;
+👤 الاسم: ${name.value}
+📞 الهاتف: ${phone.value}
+📍 الولاية: ${state.value}
+🚚 التوصيل: ${delivery.value}`;
 
 let link = "https://wa.me/213668086810?text=" + encodeURIComponent(msg);
 
 window.open(link);
-  }
+}
 </script>
 
 </body>
