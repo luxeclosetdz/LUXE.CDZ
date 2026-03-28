@@ -222,11 +222,12 @@ box-shadow:0 0 10px #9CAF88;
 <span class="old">2600 DA</span>
 <div class="price">2200 DA</div>
 
-<select id="size4">
-<option>S</option>
-<option>M</option>
-<option>L</option>
-</select>
+<div id="sizes-4" class="sizes">
+    <button onclick="selectSize(this,'S',1)">S</button>
+    <button onclick="selectSize(this,'M',1)">M</button>
+    <button onclick="selectSize(this,'L',1)">L</button>
+</div>
+  
 
 <button onclick="order('T-shirt','https://luxeclosetdz.github.io/LUXE.CDZ/images/tshirt4.jpg','2200 DA','size4')">
 اطلب الآن
@@ -236,31 +237,33 @@ box-shadow:0 0 10px #9CAF88;
   </div>
 <script>
   
+// لكل زر مقاس، نخزن الحجم المختار مع المنتج
+function selectSize(btn, size, productId){
+  // نجيب جميع أزرار المنتج هذا فقط
+  document.querySelectorAll(`#sizes-${productId} button`).forEach(b=>{
+    b.classList.remove("active");
+  });
 
+  btn.classList.add("active");
 
-let selectedSize = "";
-
-function selectSize(btn,size){
-
-document.querySelectorAll(".sizes button").forEach(b=>{
-b.classList.remove("active");
-});
-
-btn.classList.add("active");
-
-selectedSize = size;
-}
-  
-function goOrder(name,img,price){
-
-if(!selectedSize){
-alert("اختار المقاس أولاً!");
-return;
+  // نخزن الحجم المختار في data attribute للزر الطلب
+  document.getElementById(`orderBtn-${productId}`).dataset.size = size;
 }
 
-window.location.href =
-`order.html?name=${name}&img=${img}&price=${price}&size=${selectedSize}`;
+// زر الطلب يجيب الحجم المختار من data attribute
+function goOrder(name, img, price, productId){
+  let size = document.getElementById(`orderBtn-${productId}`).dataset.size;
+
+  if(!size){
+    alert("اختار المقاس أولاً!");
+    return;
   }
+
+  window.location.href =
+  `order.html?name=${name}&img=${img}&price=${price}&size=${size}`;
+  }
+
+
 </script>
 
 </body>
