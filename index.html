@@ -117,6 +117,26 @@ border-radius:50%;
 text-decoration:none;
 box-shadow:0 0 15px #25D366;
 }
+  .sizes button{
+padding:10px 15px;
+margin:5px;
+border:1px solid #555;
+background:transparent;
+color:white;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.sizes button:hover{
+border-color:#9CAF88;
+}
+
+.sizes button.active{
+background:#9CAF88;
+color:black;
+box-shadow:0 0 10px #9CAF88;
+    }
 </style>
 </head>
 
@@ -137,11 +157,12 @@ box-shadow:0 0 15px #25D366;
   <span class="old">2600 DA</span>
 <div class="price">2200 DA</div>
 
-<select id="size1">
-<option>S</option>
-<option>M</option>
-<option>L</option>
-</select>
+<div class="sizes">
+  <button onclick="selectSize(this,'S')">S</button>
+  <button onclick="selectSize(this,'M')">M</button>
+  <button onclick="selectSize(this,'L')">L</button>
+  <button onclick="selectSize(this,'XL')">XL</button>
+</div>
 
 <button onclick="order('T-shirt','https://luxeclosetdz.github.io/LUXE.CDZ/images/tshirt1.jpg','2200 DA','size1')">اطلب الآن</button>
 </div>
@@ -156,11 +177,12 @@ box-shadow:0 0 15px #25D366;
 <span class="price">2200 DA</span>
 </div>
 
-<select id="size2">
-<option>S</option>
-<option>M</option>
-<option>L</option>
-</select>
+<div class="sizes">
+  <button onclick="selectSize(this,'S')">S</button>
+  <button onclick="selectSize(this,'M')">M</button>
+  <button onclick="selectSize(this,'L')">L</button>
+  <button onclick="selectSize(this,'XL')">XL</button>
+</div>
 
 <button onclick="order('T-shirt','https://luxeclosetdz.github.io/LUXE.CDZ/images/tshirt2.jpg','2200 DA','size2')">اطلب الآن</button>
 </div>ا
@@ -173,11 +195,12 @@ box-shadow:0 0 15px #25D366;
   <span class="old">2600 DA</span>
 <div class="price">2200 DA</div>
 
-<select id="size1">
-<option>S</option>
-<option>M</option>
-<option>L</option>
-</select>
+<div class="sizes">
+  <button onclick="selectSize(this,'S')">S</button>
+  <button onclick="selectSize(this,'M')">M</button>
+  <button onclick="selectSize(this,'L')">L</button>
+  <button onclick="selectSize(this,'XL')">XL</button>
+</div>
 
 <button onclick="order('T-shirt','https://luxeclosetdz.github.io/LUXE.CDZ/images/tshirt3.jpg','2200 DA','size3')">اطلب الآن</button>
 </div>
@@ -190,24 +213,42 @@ box-shadow:0 0 15px #25D366;
 <h3>T-shirt</h3>
   <span class="old">2600 DA</span>
 <div class="price">2200 DA</div>
-
-<select id="size1">
-<option>S</option>
-<option>M</option>
-<option>L</option>
-</select>
+<div class="sizes">
+  <button onclick="selectSize(this,'S')">S</button>
+  <button onclick="selectSize(this,'M')">M</button>
+  <button onclick="selectSize(this,'L')">L</button>
+  <button onclick="selectSize(this,'XL')">XL</button>
+    </div>
 
 <button onclick="order('T-shirt','https://luxeclosetdz.github.io/LUXE.CDZ/images/tshirt4.jpg','2200 DA','size4')">اطلب الآن</button>
 </div>
   
 <script>
-  document.getElementById("productSize").innerText = "📏 المقاس: " + size;
-function goOrder(name,img,price,sizeId){
+  
 
-let size = document.getElementById(sizeId).value;
+
+let selectedSize = "";
+
+function selectSize(btn,size){
+
+document.querySelectorAll(".sizes button").forEach(b=>{
+b.classList.remove("active");
+});
+
+btn.classList.add("active");
+
+selectedSize = size;
+}
+  
+function goOrder(name,img,price){
+
+if(!selectedSize){
+alert("اختار المقاس أولاً!");
+return;
+}
 
 window.location.href =
-`order.html?name=${name}&img=${img}&price=${price}&size=${size}`;
+`order.html?name=${name}&img=${img}&price=${price}&size=${selectedSize}`;
   }
 </script>
 
