@@ -255,11 +255,8 @@ let size = document.getElementById(`orderBtn-${productId}`).dataset.size;
 if(!size){
 alert("اختار المقاس أولاً!");
 return;
-}
-
-window.location.href =
-`order.html?name=${name}&img=${img}&price=${price}&size=${size}`;
-}
+  window.location.href =
+`order.html?name=${encodeURIComponent(name)}&img=${encodeURIComponent(img)}&price=${encodeURIComponent(price)}&size=${encodeURIComponent(size)}`;
 </script>
 
 </body>
