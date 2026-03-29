@@ -138,16 +138,14 @@ color:#9CAF88;
 <script>
 const params = new URLSearchParams(window.location.search);
 
-const nameP = params.get("name");
-const img = params.get("img");
-const price = params.get("price");
-const size = params.get("size");
-
+const nameP = params.get("name") || "منتج";
+const img = params.get("img") || "";
+const price = params.get("price") || "";
+const size = params.get("size") || "";
 document.getElementById("productImg").src = img;
 document.getElementById("productName").innerText = nameP;
 document.getElementById("productPrice").innerText = "💰 " + price;
 document.getElementById("productSize").innerText = "📏 المقاس: " + size;
-
 function send(){
 
 let msg = `طلب جديد 🔥
@@ -159,12 +157,15 @@ let msg = `طلب جديد 🔥
 👤 الاسم: ${name.value}
 📞 الهاتف: ${phone.value}
 📍 الولاية: ${state.value}
-🚚 التوصيل: ${delivery.value}`;
+🚚 التوصيل: ${delivery.value}
+
+📸 صورة المنتج:
+${img}`;
 
 let link = "https://wa.me/213668086810?text=" + encodeURIComponent(msg);
 
 window.open(link);
-}
+  }
 </script>
 
 </body>
