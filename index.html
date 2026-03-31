@@ -109,15 +109,52 @@ animation:pulse 2s infinite;
 50%{box-shadow:0 0 25px #9CAF88;}
 100%{box-shadow:0 0 10px #9CAF88;}
 }
+  .top-bar{
+text-align:center;
+padding:10px;
+font-size:16px;
+font-weight:bold;
+color:#9CAF88;
+background:#111;
+letter-spacing:1px;
+box-shadow:0 0 15px #9CAF88;
+animation:glowText 1.5s infinite alternate;
+}
+
+@keyframes glowText{
+from{
+text-shadow:0 0 5px #9CAF88, 0 0 10px #9CAF88;
+}
+to{
+text-shadow:0 0 20px #9CAF88, 0 0 40px #9CAF88;
+}
+  }
+  .top-bar{
+overflow:hidden;
+white-space:nowrap;
+}
+
+.top-bar::after{
+content:"🚚 توصيل 69 ولاية 🌟 🚚 توصيل 69 ولاية 🌟 🚚 توصيل 69 ولاية 🌟";
+display:inline-block;
+padding-left:100%;
+animation:moveText 10s linear infinite;
+}
+
+@keyframes moveText{
+from{transform:translateX(0);}
+to{transform:translateX(-100%);}
+  }
 </style>
 
 </head>
 
 <body>
-
+  
 <header>LUXE.CLOSET.DZ</header>
 
 <div class="container">
+  
 
 <!-- المنتج 1 -->
 <div class="card">
