@@ -32,6 +32,18 @@ border-radius:20px;
 padding:15px;
 margin-bottom:25px;
 box-shadow:0 0 20px rgba(156,175,136,0.4);
+opacity:0;
+transform:translateY(30px);
+animation:fadeUp 0.6s ease forwards;
+}
+
+.card:nth-child(1){animation-delay:0.2s;}
+.card:nth-child(2){animation-delay:0.4s;}
+.card:nth-child(3){animation-delay:0.6s;}
+.card:nth-child(4){animation-delay:0.8s;}
+
+@keyframes fadeUp{
+to{opacity:1; transform:translateY(0);}
 }
 
 .img-box{
@@ -45,6 +57,11 @@ border-radius:15px;
 width:100%;
 height:100%;
 object-fit:cover;
+transition:0.4s;
+}
+
+.img-box:hover img{
+transform:scale(1.1);
 }
 
 .price{
@@ -57,7 +74,6 @@ text-decoration:line-through;
 color:gray;
 }
 
-/* ZARA sizes */
 .sizes button{
 padding:10px 15px;
 margin:5px;
@@ -66,12 +82,14 @@ background:transparent;
 color:white;
 border-radius:8px;
 cursor:pointer;
+transition:0.3s;
 }
 
 .sizes button.active{
 background:#9CAF88;
 color:black;
-box-shadow:0 0 10px #9CAF88;
+box-shadow:0 0 15px #9CAF88;
+transform:scale(1.1);
 }
 
 button{
@@ -83,44 +101,6 @@ background:#9CAF88;
 color:black;
 font-weight:bold;
 margin-top:10px;
-}
-  .card{
-opacity:0;
-transform:translateY(30px);
-animation:fadeUp 0.6s ease forwards;
-}
-
-.card:nth-child(1){animation-delay:0.2s;}
-.card:nth-child(2){animation-delay:0.4s;}
-.card:nth-child(3){animation-delay:0.6s;}
-.card:nth-child(4){animation-delay:0.8s;}
-
-@keyframes fadeUp{
-to{
-opacity:1;
-transform:translateY(0);
-}
-  }
-.sizes button{
-transition:0.3s;
-}
-
-.sizes button:active{
-transform:scale(0.9);
-}
-
-.sizes button.active{
-background:#9CAF88;
-color:black;
-box-shadow:0 0 15px #9CAF88;
-transform:scale(1.1);
-                   }
-  .card:hover{
-transform:scale(1.03);
-transition:0.3s;
-box-shadow:0 0 30px #9CAF88;
-  }
-  button{
 animation:pulse 2s infinite;
 }
 
@@ -129,13 +109,6 @@ animation:pulse 2s infinite;
 50%{box-shadow:0 0 25px #9CAF88;}
 100%{box-shadow:0 0 10px #9CAF88;}
 }
-  .img-box img{
-transition:0.4s;
-}
-
-.img-box:hover img{
-transform:scale(1.1);
-  }
 </style>
 
 </head>
@@ -163,7 +136,10 @@ transform:scale(1.1);
 </div>
 
 <button id="orderBtn-1"
-onclick="goOrder('T-shirt','https://luxeclosetdz.github.io/LUXE.CDZ/images/tshirt1.jpg','1900 DA',1)">
+data-name="T-shirt"
+data-img="https://luxeclosetdz.github.io/LUXE.CDZ/images/tshirt1.jpg"
+data-price="1900 DA"
+onclick="goOrder(this,1)">
 🛒 اطلب الآن
 </button>
 </div>
@@ -185,7 +161,10 @@ onclick="goOrder('T-shirt','https://luxeclosetdz.github.io/LUXE.CDZ/images/tshir
 </div>
 
 <button id="orderBtn-2"
-onclick="goOrder('T-shirt','https://luxeclosetdz.github.io/LUXE.CDZ/images/tshirt2.jpg','2200 DA',2)">
+data-name="T-shirt"
+data-img="https://luxeclosetdz.github.io/LUXE.CDZ/images/tshirt2.jpg"
+data-price="2200 DA"
+onclick="goOrder(this,2)">
 🛒 اطلب الآن
 </button>
 </div>
@@ -207,7 +186,10 @@ onclick="goOrder('T-shirt','https://luxeclosetdz.github.io/LUXE.CDZ/images/tshir
 </div>
 
 <button id="orderBtn-3"
-onclick="goOrder('T-shirt','https://luxeclosetdz.github.io/LUXE.CDZ/images/tshirt3.jpg','1900 DA',3)">
+data-name="T-shirt"
+data-img="https://luxeclosetdz.github.io/LUXE.CDZ/images/tshirt3.jpg"
+data-price="1900 DA"
+onclick="goOrder(this,3)">
 🛒 اطلب الآن
 </button>
 </div>
@@ -229,7 +211,10 @@ onclick="goOrder('T-shirt','https://luxeclosetdz.github.io/LUXE.CDZ/images/tshir
 </div>
 
 <button id="orderBtn-4"
-onclick="goOrder('T-shirt','https://luxeclosetdz.github.io/LUXE.CDZ/images/tshirt4.jpg','2200 DA',4)">
+data-name="T-shirt"
+data-img="https://luxeclosetdz.github.io/LUXE.CDZ/images/tshirt4.jpg"
+data-price="2200 DA"
+onclick="goOrder(this,4)">
 🛒 اطلب الآن
 </button>
 </div>
@@ -248,18 +233,23 @@ btn.classList.add("active");
 document.getElementById(`orderBtn-${productId}`).dataset.size = size;
 }
 
-function goOrder(name, img, price, productId){
+function goOrder(btn, productId){
 
-let size = document.getElementById(`orderBtn-${productId}`).dataset.size;
+let size = btn.dataset.size;
 
 if(!size){
 alert("اختار المقاس أولاً!");
 return;
 }
 
+let name = btn.dataset.name;
+let img = btn.dataset.img;
+let price = btn.dataset.price;
+
 window.location.href =
 `order.html?name=${encodeURIComponent(name)}&img=${encodeURIComponent(img)}&price=${encodeURIComponent(price)}&size=${encodeURIComponent(size)}`;
 }
 </script>
+
 </body>
   </html>
