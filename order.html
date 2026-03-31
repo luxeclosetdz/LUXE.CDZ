@@ -143,40 +143,31 @@ const img = params.get("img") || "";
 const price = params.get("price") || "";
 const size = params.get("size") || "";
   
-document.getElementById("productImg").src = img;
-document.getElementById("productName").innerText = nameP;
-document.getElementById("productPrice").innerText = "💰 " + price;
-document.getElementById("productSize").innerText = "📏 المقاس: " + size;
 function send(){
 
-let msg =
-`🛍️ *طلب جديد - LUXE.CLOSET*
+let userName = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
+let state = document.getElementById("state").value;
+let delivery = document.getElementById("delivery").value;
 
-━━━━━━━━━━━━━━━
+let msg = `طلب جديد 🔥
 
-📦 *المنتج:* ${nameP}
-💰 *السعر:* ${price}
-📏 *المقاس:* ${size}
+🛍 المنتج: ${nameP}
+💰 السعر: ${price}
+📏 المقاس: ${size}
 
-━━━━━━━━━━━━━━━
+👤 الاسم: ${userName}
+📞 الهاتف: ${phone}
+📍 الولاية: ${state}
+🚚 التوصيل: ${delivery}
 
-👤 *الاسم:* ${name.value}
-📞 *الهاتف:* ${phone.value}
-📍 *الولاية:* ${state.value}
-🚚 *التوصيل:* ${delivery.value}
-
-━━━━━━━━━━━━━━━
-
-📸 *صورة المنتج:*
-${img}
-
-━━━━━━━━━━━━━━━
-🔥 شكراً لثقتكم في LUXE.CLOSET`;
+📸 صورة المنتج:
+${img}`;
 
 let link = "https://wa.me/213668086810?text=" + encodeURIComponent(msg);
 
 window.open(link);
-  }
+ }
 </script>
 
 </body>
