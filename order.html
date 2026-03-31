@@ -137,10 +137,10 @@ color:#9CAF88;
 
 <script>
 const params = new URLSearchParams(window.location.search);
-const nameP = decodeURIComponent(params.get("name") || "منتج");
-const img = decodeURIComponent(params.get("img") || "");
-const price = decodeURIComponent(params.get("price") || "");
-const size = decodeURIComponent(params.get("size") || "");
+const nameP = params.get("name") ? decodeURIComponent(params.get("name")) : "منتج";
+const img = params.get("img") ? decodeURIComponent(params.get("img")) : "";
+const price = params.get("price") ? decodeURIComponent(params.get("price")) : "";
+const size = params.get("size") ? decodeURIComponent(params.get("size")) : "";
   
 document.getElementById("productImg").src = img;
 document.getElementById("productName").innerText = nameP;
