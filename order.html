@@ -148,19 +148,29 @@ document.getElementById("productPrice").innerText = "💰 " + price;
 document.getElementById("productSize").innerText = "📏 المقاس: " + size;
 function send(){
 
-let msg = `طلب جديد 🔥
+let msg =
+`🛍️ *طلب جديد - LUXE.CLOSET*
 
-🛍 المنتج: ${nameP}
-💰 السعر: ${price}
-📏 المقاس: ${size}
+━━━━━━━━━━━━━━━
 
-👤 الاسم: ${name.value}
-📞 الهاتف: ${phone.value}
-📍 الولاية: ${state.value}
-🚚 التوصيل: ${delivery.value}
+📦 *المنتج:* ${nameP}
+💰 *السعر:* ${price}
+📏 *المقاس:* ${size}
 
-📸 صورة المنتج:
-${img}`;
+━━━━━━━━━━━━━━━
+
+👤 *الاسم:* ${name.value}
+📞 *الهاتف:* ${phone.value}
+📍 *الولاية:* ${state.value}
+🚚 *التوصيل:* ${delivery.value}
+
+━━━━━━━━━━━━━━━
+
+📸 *صورة المنتج:*
+${img}
+
+━━━━━━━━━━━━━━━
+🔥 شكراً لثقتكم في LUXE.CLOSET`;
 
 let link = "https://wa.me/213668086810?text=" + encodeURIComponent(msg);
 
