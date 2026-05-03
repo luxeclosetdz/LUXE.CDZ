@@ -21,9 +21,11 @@ font-size:24px;
 color:#9CAF88;
 text-shadow:0 0 10px #9CAF88;
 }
-
 .container{
 padding:15px;
+display:grid;
+grid-template-columns:repeat(2, 1fr);
+gap:15px;
 }
 
 .card{
@@ -127,6 +129,11 @@ text-shadow:0 0 5px #9CAF88, 0 0 10px #9CAF88;
 }
 to{
 text-shadow:0 0 20px #9CAF88, 0 0 40px #9CAF88;
+}
+  @media(max-width:600px){
+.container{
+grid-template-columns:1fr;
+}
 }
   }
  
